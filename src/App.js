@@ -1,9 +1,12 @@
-import React from 'react';
-import './App.css';
+import React, { Fragment } from 'react';
+import Admin from './admin';
+
 
 function App() {
   return (
-    <div className="">123</div>
+    <Fragment>
+      <Admin />
+    </Fragment>
   );
 }
 
