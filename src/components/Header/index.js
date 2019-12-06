@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Row, Col } from 'antd';
 import './index.less';
 import Util from '../../utils/utils';
@@ -24,7 +25,8 @@ class Header extends Component {
 
     getWeatherAPIData(){
         let city = '北京';
-        const url = 'http://api.map.baidu.com/telematics/v3/weather?location=' + encodeURIComponent(city) + '&output=json&ak=3p49MVra6urFRGOT9s8UBWr2';
+        const url = 'http://api.map.baidu.com/telematics/v3/weather?location=' 
+                    + encodeURIComponent(city) + '&output=json&ak=3p49MVra6urFRGOT9s8UBWr2';
         axios.jsonp({
             url: url
         }).then((res) => {
@@ -44,7 +46,7 @@ class Header extends Component {
                 <Row className="header-top">
                     <Col span={24}>
                         <span>{this.state.userName}</span>
-                        <a href="/">Logout</a>
+                        <Link to='/login'>登录</Link>
                     </Col>
                 </Row>
                 <Row className="breadcrumb">
