@@ -24,18 +24,20 @@ class AdvanceTable extends Component {
             }
         }).then((res) => {
             if (res.code === 0) {
-                res.result.list.map((item, index) => {
-                    item.key = index;
+                res.result.list.map((item) => {
+                    item.key = item.id;
                     return null;
                 })
                 this.setState({
                     dataSource: res.result.list
                 })
             }
-        })
+        }).catch(() => {
+            console.log("advanceTable error");
+        });
     }
 
-    handleChange = (pagination, filters, sorter)=>{
+    handleChange = (pagination, filters, sorter) => {
         console.log("::" + sorter)
         this.setState({
             sortOrder: sorter.order
@@ -132,6 +134,7 @@ class AdvanceTable extends Component {
                 dataIndex: 'time'
             }
         ]
+
         const columns2 = [
             {
                 title: 'id',
@@ -198,87 +201,6 @@ class AdvanceTable extends Component {
                 dataIndex: 'birthday'
             },
             {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            }, {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            }, {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            }, {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            }, {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            }, {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            }, {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            }, {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            }, {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            }, {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            }, {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            }, {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            }, {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            }, {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            }, {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            }, {
-                title: '生日',
-                key: 'birthday',
-                width: 120,
-                dataIndex: 'birthday'
-            },
-            {
                 title: '地址',
                 key: 'address',
                 width: 120,
@@ -293,6 +215,7 @@ class AdvanceTable extends Component {
                 dataIndex: 'time'
             }
         ]
+
         const columns3 = [
             {
                 title: 'id',
@@ -428,11 +351,13 @@ class AdvanceTable extends Component {
             },
             {
                 title: '操作',
-                render:(text,item)=>{
+                render: (text,item) => {
                     return <Button size="small" onClick={(item) => { this.handleDelete(item) }}>删除</Button>
                 }
             }
         ]
+
+        
         return (
             <div>
                 <Card title="头部固定">

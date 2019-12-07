@@ -11,7 +11,7 @@ class BasicTable extends Component{
     params = { page: 1 }
 
     componentDidMount(){
-        basicTableData.map((item,index) => {
+        basicTableData.map((item, index) => {
             item.key = index;
             return null;
         })
@@ -22,16 +22,17 @@ class BasicTable extends Component{
     }
 
     // 动态获取mock数据
-    request = ()=>{
+    request = () => {
         let _this = this;
         Axios.ajax({
             url: '/table/list',
             data: {
                 params: {
-                    page: this.params.page
+                    page: _this.params.page
                 }
             }
         }).then((res) => {
+            console.log("###");
             if(res.code === 0){
                 res.result.list.map((item, index) => {
                     item.key = index;
@@ -41,13 +42,15 @@ class BasicTable extends Component{
                     dataSource2: res.result.list,
                     selectedRowKeys: [],
                     selectedRows: null,
-                    pagination: Utils.pagination(res,(current)=>{
+                    pagination: Utils.pagination(res, (current) => {
                         _this.params.page = current;
                         this.request();
                     })
                 })
             }
-        })
+        }).catch(() => {
+            console.log("basicTable error");
+        });
     }
 
     onRowClick = (record, index)=>{
@@ -63,7 +66,7 @@ class BasicTable extends Component{
     }
 
     // 多选执行删除动作
-    handleDelete = (()=>{
+    handleDelete = (() => {
         let rows = this.state.selectedRows;
         let ids = [];
         rows.map((item) => {
@@ -73,7 +76,7 @@ class BasicTable extends Component{
         Modal.confirm({
             title:'删除提示',
             content: `您确定要删除这些数据吗？${ids.join(',')}`,
-            onOk:()=>{
+            onOk: () => {
                 message.success('删除成功');
                 this.request();
             }
@@ -186,10 +189,10 @@ class BasicTable extends Component{
                     <Table
                         bordered
                         rowSelection={rowSelection}
-                        onRow = {(record,index) => {
+                        onRow={(record, index) => {
                             return {
                                 onClick: () => {
-                                    this.onRowClick(record,index);
+                                    this.onRowClick(record, index);
                                 }
                             };
                         }}
