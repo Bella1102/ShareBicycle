@@ -1,10 +1,10 @@
 import JsonP from 'jsonp';
 import axios from 'axios';
 import { Modal } from 'antd';
-import Utils from './../utils/utils';
+import Utils from './utils';
 
 
-export default class Axios {
+class Axios {
 
     static requestList(_this, url, params, isMock){
         var data = {
@@ -12,8 +12,7 @@ export default class Axios {
             isMock
         }
         this.ajax({
-            url,
-            data
+            url, data
         }).then((data)=>{
             if (data && data.result){
                 let list = data.result.item_list.map((item, index) => {
@@ -30,6 +29,7 @@ export default class Axios {
             }
         });
     }
+
     static jsonp(options) {
         return new Promise((resolve, reject) => {
             JsonP(options.url, {
@@ -46,36 +46,35 @@ export default class Axios {
 
     static ajax(options){
         let loading;
+        let baseApi = '';
         if (options.data && options.data.isShowLoading !== false){
             loading = document.getElementById('ajaxLoading');
             loading.style.display = 'block';
         }
-        let baseApi = '';
         if(options.isMock){
             baseApi = 'https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api';
         }else{
             baseApi = 'https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api';
         }
-        return new Promise((resolve,reject)=>{
+        return new Promise((resolve, reject)=>{
             axios({
-                url:options.url,
-                method:'get',
-                baseURL:baseApi,
-                timeout:5000,
+                url: options.url,
+                method: 'get',
+                baseURL: baseApi,
+                timeout: 5000,
                 params: (options.data && options.data.params) || ''
-            }).then((response)=>{
+            }).then((response) => {
                 if (options.data && options.data.isShowLoading !== false) {
                     loading = document.getElementById('ajaxLoading');
                     loading.style.display = 'none';
                 }
                 if (response.status === '200'){
-                    let res = response.data;
-                    if (res.code === '0'){
-                        resolve(res);
+                    if (response.data.code === '0'){
+                        resolve(response.data);
                     }else{
                         Modal.info({
-                            title:"提示",
-                            content:res.msg
+                            title: "提示",
+                            content: response.data.msg
                         })
                     }
                 }else{
@@ -87,3 +86,4 @@ export default class Axios {
 }
 
 
+export default Axios;

@@ -46,11 +46,11 @@ class Register extends Component{
     render(){
         const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
-            labelCol: { xs: 24, sm: 4 },
-            wrapperCol: { xs: 24, sm: 12 }
+            labelCol: { xs: 24, sm: 4, xl: 8 },
+            wrapperCol: { xs: 24, sm: 12, xl: 8 }
         }
         const offsetLayout = {
-            wrapperCol: { xs: 24, sm: { span: 12, offset: 4 } }
+            wrapperCol: { xs: 24, sm: { span: 12, offset: 4 }, xl: { span: 8, offset: 8 }  }
         }
 
         return (

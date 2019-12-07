@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
-import MenuConfig from './../../config/menuConfig';
+import MenuConfig from './menuConfig';
 import './index.less';
 
 

@@ -1,4 +1,5 @@
 @import './default.less';
+@import './loading.less';
 
 html, body {
   margin: 0;
@@ -9,6 +10,7 @@ html, body {
 ul,li{
     list-style: none;
 }
+
 .clearfix{
     &::after{
         content:' ';
@@ -17,9 +19,9 @@ ul,li{
         visibility: hidden;
     }
 }
+
 .container{
     .nav-left{
-        min-width: 160px;
         background-color:#001529;
         color: #ffffff;
         height: calc(100vh);
@@ -44,6 +46,7 @@ ul,li{
         margin-right: -2px;
     }
 }
+
 .operate-wrap{
     button{
         margin-right: 10px;

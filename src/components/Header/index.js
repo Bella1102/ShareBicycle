@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'antd';
+import axios from '../../utils/axios';
+import utils from '../../utils/utils';
 import './index.less';
-import Util from '../../utils/utils';
-import axios from '../../axios';
 
 
 
@@ -15,7 +15,7 @@ class Header extends Component {
             userName:'河畔一角'
         })
         setInterval(()=>{
-            let sysTime = Util.formatDate(new Date().getTime());
+            let sysTime = utils.formatDate(new Date().getTime());
             this.setState({
                 sysTime: sysTime
             })
@@ -46,7 +46,8 @@ class Header extends Component {
                 <Row className="header-top">
                     <Col span={24}>
                         <span>{this.state.userName}</span>
-                        <Link to='/login'>登录</Link>
+                        <Link to='/login'>Log in</Link>
+                        <Link to='/register'>Register</Link>
                     </Col>
                 </Row>
                 <Row className="breadcrumb">
