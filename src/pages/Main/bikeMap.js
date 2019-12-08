@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card } from 'antd';
 import Axios from '../../utils/axios';
-import BaseForm from '../../components/BaseForm';
+import BaseForm from '../../components/baseForm';
 
 
 

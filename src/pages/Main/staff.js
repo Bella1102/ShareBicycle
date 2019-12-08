@@ -3,8 +3,8 @@ import moment from 'moment';
 import { Card, Button, Modal,Form, Input, Radio, DatePicker, Select} from 'antd';
 import Axios from '../../utils/axios';
 import * as Utils from '../../utils/utils';
-import BaseForm from '../../components/BaseForm';
-import ETable from '../../components/ETable';
+import BaseForm from '../../components/baseForm';
+import BaseTable from '../../components/baseTable';
 
 
 const FormItem = Form.Item;
@@ -16,13 +16,12 @@ const Option = Select.Option;
 
 class Staff extends Component{
 
-    params = {
-        page:1
-    }
 
     state = {
         isVisible:false
     }
+
+    params = { page:1 }
 
     formList = [
         {
@@ -49,13 +48,13 @@ class Staff extends Component{
         this.requestList();
     }
 
-    handleFilter = (params)=>{
+    handleFilter = (params) => {
         this.params = params;
         this.requestList();
     }
 
-    requestList = ()=>{
-        Axios.requestList(this,'/user/list',this.params);
+    requestList = () => {
+        Axios.requestList(this, '/user/list', this.params);
     }
 
     // 功能区操作
@@ -64,8 +63,8 @@ class Staff extends Component{
         if(type === 'create'){
             this.setState({
                 type,
-                isVisible:true,
-                title:'创建员工'
+                isVisible: true,
+                title: '创建员工'
             })
         }else if(type === 'edit'){
             if (!item){
@@ -79,7 +78,7 @@ class Staff extends Component{
                 type,
                 isVisible: true,
                 title: '编辑员工',
-                userInfo:item
+                userInfo: item
             })
         }else if(type === 'detail'){
             this.setState({
@@ -98,21 +97,17 @@ class Staff extends Component{
             }
             let _this = this;
             Modal.confirm({
-                title:'确认删除',
-                content:'是否要删除当前选中的员工',
+                title: '确认删除',
+                content: '是否要删除当前选中的员工',
                 onOk(){
                     Axios.ajax({
-                        url:'/user/delete',
-                        data:{
-                            params:{
-                                id:item.id
-                            }
+                        url: '/user/delete',
+                        data: {
+                            params:{ id: item.id }
                         }
-                    }).then((res)=>{
+                    }).then((res) => {
                         if(res.code === 0){
-                            _this.setState({
-                                isVisible:false
-                            })
+                            _this.setState({ isVisible:false })
                             _this.requestList();
                         }
                     })
@@ -126,15 +121,15 @@ class Staff extends Component{
         let type = this.state.type;
         let data = this.userForm.props.form.getFieldsValue();
         Axios.ajax({
-            url:type === 'create'?'/user/add':'/user/edit',
-            data:{
+            url:type === 'create' ? '/user/add' : '/user/edit',
+            data: {
                 params: data
             }
         }).then((res)=>{
             if(res.code === 0){
                 this.userForm.props.form.resetFields();
                 this.setState({
-                    isVisible:false
+                    isVisible: false
                 })
                 this.requestList();
             }
@@ -143,21 +138,12 @@ class Staff extends Component{
 
     render(){
         const columns = [
-            {
-                title:'id',
-                dataIndex:'id'
-            },{
-                title: '用户名',
-                dataIndex: 'username'
-            }, {
-                title: '性别',
-                dataIndex: 'sex',
-                render(sex){
-                    return sex === 1?'男':'女'
-                }
-            }, {
-                title: '状态',
-                dataIndex: 'state',
+            { title:'id', dataIndex:'id' },
+            { title: '用户名', dataIndex: 'username' }, 
+            { title: '性别', dataIndex: 'sex',
+                render(sex){ return sex === 1 ? '男' : '女' }
+            }, 
+            { title: '状态', dataIndex: 'state',
                 render(state){
                     return {
                         '1':'咸鱼一条',
@@ -167,9 +153,8 @@ class Staff extends Component{
                         '5':'创业者'
                     }[state]
                 }
-            }, {
-                title: '爱好',
-                dataIndex: 'interest',
+            }, 
+            { title: '爱好', dataIndex: 'interest',
                 render(interest){
                     return {
                         '1': '游泳',
@@ -182,17 +167,12 @@ class Staff extends Component{
                         '8':'麦霸'
                     }[interest]
                 }
-            }, {
-                title: '生日',
-                dataIndex: 'birthday'
-            }, {
-                title: '联系地址',
-                dataIndex: 'address'
-            }, {
-                title: '早起时间',
-                dataIndex: 'time'
-            },
+            }, 
+            { title: '生日', dataIndex: 'birthday' }, 
+            { title: '联系地址', dataIndex: 'address' }, 
+            { title: '早起时间', dataIndex: 'time' }
         ]
+
         let footer = {};
         if(this.state.type === 'detail'){
             footer = {
@@ -211,7 +191,7 @@ class Staff extends Component{
                     <Button type="primary" icon="delete" onClick={() => this.hanleOperate('delete')}>删除员工</Button>
                 </Card>
                 <div className="content-wrap">
-                    <ETable
+                    <BaseTable
                         updateSelectedItem={Utils.updateSelectedItem.bind(this)}
                         columns={columns}
                         dataSource={this.state.list}
@@ -222,15 +202,10 @@ class Staff extends Component{
                 </div>
                 <Modal
                     title={this.state.title}
+                    width={600}
                     visible={this.state.isVisible}
                     onOk={this.handleSubmit}
-                    onCancel={()=>{
-                        this.userForm.props.form.resetFields();
-                        this.setState({
-                            isVisible:false
-                        })
-                    }}
-                    width={600}
+                    onCancel={() => { this.userForm.props.form.resetFields(); this.setState({ isVisible:false }) }}
                     { ...footer }
                 >
                     <UserForm type={this.state.type} userInfo={this.state.userInfo} 
@@ -240,9 +215,10 @@ class Staff extends Component{
         );
     }
 }
-class UserForm extends React.Component{
 
-    getState = (state)=>{
+class UserForm extends Component{
+
+    getState = (state) => {
         return {
             '1': '咸鱼一条',
             '2': '风华浪子',

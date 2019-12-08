@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Card, Button, Form, Modal, message } from 'antd';
 import Axios from '../../utils/axios';
 import * as Utils from '../../utils/utils';
-import BaseForm from '../../components/BaseForm';
-import ETable from '../../components/ETable';
+import BaseForm from '../../components/baseForm';
+import BaseTable from '../../components/baseTable';
 
 
 
@@ -49,7 +49,7 @@ class Order extends Component {
     }
 
     requestList = () => {
-        Axios.requestList(this, '/order/list', this.params,true)
+        Axios.requestList(this, '/order/list', this.params, true)
     }
     // 订单结束确认
     handleConfirm = () => {
@@ -109,7 +109,7 @@ class Order extends Component {
 
     render(){
         const columns = [
-            { title:'订单编号', dataIndex:'order_sn' },
+            { title: '订单编号', dataIndex:'order_sn' },
             { title: '车辆编号', dataIndex: 'bike_sn' },
             { title: '用户名', dataIndex: 'user_name' },
             { title: '手机号', dataIndex: 'mobile' },
@@ -125,8 +125,8 @@ class Order extends Component {
         ]
 
         const formItemLayout = {
-            labelCol:{span:5},
-            wrapperCol:{span:19}
+            labelCol:{ span:5 },
+            wrapperCol:{ span:19 }
         }
 
         return (
@@ -136,10 +136,10 @@ class Order extends Component {
                 </Card>
                 <Card style={{marginTop:10}}>
                     <Button type="primary" onClick={this.openOrderDetail}>订单详情</Button>
-                    <Button type="primary" style={{marginLeft:10}} onClick={this.handleConfirm}>结束订单</Button>
+                    <Button type="primary" style={{marginLeft: 10}} onClick={this.handleConfirm}>结束订单</Button>
                 </Card>
                 <div className="content-wrap">
-                    <ETable
+                    <BaseTable
                         updateSelectedItem={Utils.updateSelectedItem.bind(this)}
                         columns={columns}
                         dataSource={this.state.list}

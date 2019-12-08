@@ -2,32 +2,32 @@ import React,  { Component } from 'react';
 import { Table } from 'antd';
 
 
-class ETable extends Component{
+class BaseTable extends Component{
 
     onRowClick = (record,index) => {
         let rowSelection = this.props.rowSelection;
-        if (rowSelection === 'checkbox'){
+        if (rowSelection === 'checkbox') {
             let selectedRowKeys = this.props.selectedRowKeys;
             let selectedItem = this.props.selectedItem;
             let selectedIds = this.props.selectedIds;
             if (selectedIds){
                 const i = selectedIds.indexOf(record.id);
-                if(i === -1){
+                if (i === -1) {
                     selectedIds.push(record.id);
                     selectedRowKeys.push(index);
                     selectedItem.push(record);
-                }else{
+                } else {
                     selectedIds.splice(i,1);
                     selectedRowKeys.splice(i, 1);
                     selectedItem.splice(i, 1);
                 }
-            }else{
+            } else {
                 selectedIds = [record.id];
                 selectedRowKeys = [index];
                 selectedItem = [record];
             }
             this.props.updateSelectedItem(selectedRowKeys, selectedItem, selectedIds)
-        }else{
+        } else {
             let selectedRowKeys = [index];
             let selectedItem = record;
             this.props.updateSelectedItem(selectedRowKeys, selectedItem)
@@ -48,10 +48,11 @@ class ETable extends Component{
         } else {
             row_selection = 'radio';
         }
+
         return <Table
             bordered
             {...this.props}
-            rowSelection={row_selection ? rowSelection:null}
+            rowSelection={row_selection ? rowSelection : null}
             onRow={(record, index) => {
                 return {
                     onClick: () => {
@@ -72,4 +73,4 @@ class ETable extends Component{
     }
 }
 
-export default ETable;
+export default BaseTable;

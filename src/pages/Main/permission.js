@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Card, Button, Form, Select, Modal, Input, Tree, Transfer } from 'antd';
 import Axios from '../../utils/axios';
 import * as Utils from '../../utils/utils';
-import menuConfig from '../../utils/menuConfig';
-import ETable from './../../components/ETable';
+import menuConfig from '../../static/menuConfig';
+import BaseTable from '../../components/baseTable';
 
 
 
@@ -151,7 +151,7 @@ class Permission extends Component {
                     <Button type="primary" onClick={ this.hanldeUserAuth }>用户授权</Button>
                 </Card>
                 <div className="content-wrap">
-                    <ETable 
+                    <BaseTable
                         updateSelectedItem={Utils.updateSelectedItem.bind(this)}
                         selectedRowKeys={this.state.selectedRowKeys}
                         dataSource={this.state.list}

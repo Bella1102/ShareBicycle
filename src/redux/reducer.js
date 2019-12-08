@@ -1,9 +1,9 @@
 /* Reducer 数据处理 */
 
-import { type } from './../action';
+import { type } from './action';
 
 const initialState = {
-    menuName:'首页'
+    menuName: ''
 }
 
 export default (state, action) => {
