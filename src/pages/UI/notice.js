@@ -1,17 +1,19 @@
-import React from 'react'
-import { Card, Button, notification } from 'antd'
-import './ui.less'
-export default class Buttons extends React.Component {
+import React, { Component } from 'react';
+import { Card, Button, notification } from 'antd';
+import './ui.less';
 
-    openNotification = (type,direction)=>{
+
+class UINotification extends Component {
+
+    openNotification = (type,direction) => {
         if (direction){
             notification.config({
                 placement: direction
             })
         }
         notification[type]({
-            message:'发工资了',
-            description:'上个月考勤22天，迟到12天，实发工资250，请笑纳'
+            message: '发工资了',
+            description: '上个月考勤22天，迟到12天，实发工资250，请笑纳'
         });
     }
 
@@ -34,3 +36,5 @@ export default class Buttons extends React.Component {
         );
     }
 }
+
+export default UINotification;

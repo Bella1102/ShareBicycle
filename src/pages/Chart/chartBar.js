@@ -10,29 +10,22 @@ import 'echarts/lib/component/markPoint';
 import chartTheme from './chartTheme';
 
 
+
 class BarChart extends Component{
 
     UNSAFE_componentWillMount(){
-        echarts.registerTheme('Imooc', chartTheme);
+        echarts.registerTheme('barChartTheme', chartTheme);
     }
 
-    getOption = ()=>{
+    getOption1 = () => {
         let option = {
-            title: {
-                text: '用户骑行订单'
-            },
-            tooltip: {
-                trigger: 'axis'
-            },
-            xAxis: {
-                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-            },
-            yAxis: {
-                type: 'value'
-            },
+            title: { text: 'User Ride Order' },
+            tooltip: { trigger: 'axis' },
+            xAxis: { data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] },
+            yAxis: { type: 'value' },
             series:[
                 {
-                    name: '订单量',
+                    name: 'Order Quantity',
                     type: 'bar',
                     data: [1000, 2000, 1500, 3000, 2000, 1200, 800]
                 }
@@ -43,32 +36,22 @@ class BarChart extends Component{
 
     getOption2 = () => {
         let option = {
-            title: {
-                text: '用户骑行订单'
-            },
-            legend:{
-                data:['OFO','摩拜','小蓝']
-            },
-            tooltip: {
-                trigger: 'axis'
-            },
-            xAxis: {
-                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-            },
-            yAxis: {
-                type: 'value'
-            },
+            title: { text: 'User Ride Order' },
+            legend:{ data: ['OFO', 'Mobike', 'Blue'] },
+            tooltip: { trigger: 'axis' },
+            xAxis: { data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] },
+            yAxis: { type: 'value' },
             series: [
                 {
                     name: 'OFO',
                     type: 'bar',
                     data: [2000, 3000, 5500, 7000, 8000, 12000, 20000]
                 }, {
-                    name: '摩拜',
+                    name: 'Mobike',
                     type: 'bar',
                     data: [1500, 3000, 4500, 6000, 8000, 10000, 15000]
                 }, {
-                    name: '小蓝',
+                    name: 'Blue',
                     type: 'bar',
                     data: [1000, 2000, 2500, 4000, 6000, 7000, 8000]
                 }
@@ -80,11 +63,11 @@ class BarChart extends Component{
     render(){
         return (
             <div>
-                <Card title="柱形图表之一">
-                    <ReactEcharts option={this.getOption()} theme="Imooc" style={{height:500}}/>
+                <Card title="bar chart 1">
+                    <ReactEcharts option={this.getOption1()} theme="barChartTheme" style={{height: 500}}/>
                 </Card>
-                <Card title="柱形图表之二" style={{marginTop:10}}>
-                    <ReactEcharts option={this.getOption2()} theme="Imooc" style={{ height: 500 }} />
+                <Card title="bar chart 2" style={{marginTop:10}}>
+                    <ReactEcharts option={this.getOption2()} theme="barChartTheme" style={{height: 500}} />
                 </Card>
             </div>
         );

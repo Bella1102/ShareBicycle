@@ -41,7 +41,7 @@ export function getOptionList(data){
     if(!data){
         return [];
     }
-    let options = []
+    let options = [];
     data.map((item) => {
         options.push(<Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>);
         return null;

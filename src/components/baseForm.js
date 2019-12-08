@@ -76,7 +76,7 @@ class FilterForm extends Component{
                         {
                             getFieldDecorator([field],{
                                 initialValue: initialValue
-                            })( <Input type="text" style={{ width: width }} placeholder="123" /> )
+                            })( <Input type="text" style={{ width: width }} placeholder={placeholder} /> )
                         }
                     </FormItem>;
                     formItemList.push(INPUT)

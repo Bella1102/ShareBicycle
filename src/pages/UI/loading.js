@@ -1,7 +1,9 @@
-import React from 'react'
-import { Card, Button, Spin, Icon, Alert} from  'antd'
-import './ui.less'
-export default class Loadings extends React.Component{
+import React, { Component } from 'react';
+import { Card, Spin, Icon, Alert } from  'antd';
+import './ui.less';
+
+
+class UILoading extends Component{
 
     render(){
         const icon = <Icon  type="loading" style={{fontSize:24}}/>
@@ -49,3 +51,5 @@ export default class Loadings extends React.Component{
         );
     }
 }
+
+export default UILoading;

@@ -79,12 +79,16 @@ class City extends Component{
         const columns = [
             { title: '城市ID', dataIndex: 'id' }, 
             { title: '城市名称', dataIndex: 'name' }, 
-            { title: '用车模式', dataIndex: 'mode', render(mode){return mode === 1 ? '停车点' : '禁停区';} }, 
-            { title: '营运模式', dataIndex: 'op_mode', render(op_mode){return op_mode === 1 ? '自营' : '加盟';} }, 
+            { title: '用车模式', dataIndex: 'mode', 
+                render(mode){return mode === 1 ? '停车点' : '禁停区';} }, 
+            { title: '营运模式', dataIndex: 'op_mode', 
+                render(op_mode){return op_mode === 1 ? '自营' : '加盟';} }, 
             { title: '授权加盟商', dataIndex: 'franchisee_name' }, 
-            { title: '城市管理员', dataIndex: 'city_admins', render(arr){return arr.map((item) => item.user_name).join(',')} }, 
+            { title: '城市管理员', dataIndex: 'city_admins', 
+                render(arr){return arr.map((item) => item.user_name).join(',')} }, 
             { title: '城市开通时间', dataIndex: 'open_time' }, 
-            { title: '操作时间', dataIndex: 'update_time', render(){return Utils.formatTime(new Date().getTime())} }, 
+            { title: '操作时间', dataIndex: 'update_time', 
+                render(){return Utils.formatTime(new Date().getTime())} }, 
             { title: '操作人', dataIndex: 'sys_user_name' }
         ] 
         return (
@@ -131,7 +135,7 @@ class FilterForm extends Component{
                     {
                         getFieldDecorator('city_id')(
                             <Select style={{ width:100 }} placeholder="全部">
-                                <Option value="">全部</Option>
+                                <Option value="">All</Option>
                                 <Option value="1">北京市</Option>
                                 <Option value="2">天津市</Option>
                                 <Option value="3">深圳市</Option>
@@ -143,7 +147,7 @@ class FilterForm extends Component{
                     {
                         getFieldDecorator('mode')(
                             <Select style={{ width:120 }} placeholder="全部">
-                                <Option value="">全部</Option>
+                                <Option value="">All</Option>
                                 <Option value="1">指定停车点模式</Option>
                                 <Option value="2">禁停区模式</Option>
                             </Select>
@@ -154,7 +158,7 @@ class FilterForm extends Component{
                     {
                         getFieldDecorator('op_mode')(
                             <Select style={{ width:80 }} placeholder="全部">
-                                <Option value="">全部</Option>
+                                <Option value="">All</Option>
                                 <Option value="1">自营</Option>
                                 <Option value="2">加盟</Option>
                             </Select>
@@ -165,7 +169,7 @@ class FilterForm extends Component{
                     {
                         getFieldDecorator('auth_status')(
                             <Select style={{ width:100 }} placeholder="全部">
-                                <Option value="">全部</Option>
+                                <Option value="">All</Option>
                                 <Option value="1">已授权</Option>
                                 <Option value="2">未授权</Option>
                             </Select>
@@ -199,7 +203,7 @@ class OpenCityForm extends Component{
                             initialValue:'1'
                         })(
                             <Select style={{ width: 100 }}>
-                                <Option value="">全部</Option>
+                                <Option value="">All</Option>
                                 <Option value="1">北京市</Option>
                                 <Option value="2">天津市</Option>
                             </Select>

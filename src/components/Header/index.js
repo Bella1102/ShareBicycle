@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col } from 'antd';
+import { Row, Col, Button } from 'antd';
 import Axios from '../../utils/axios';
 import * as Utils from '../../utils/utils';
 import './index.less';
@@ -12,19 +12,18 @@ class Header extends Component {
     state={}
     UNSAFE_componentWillMount(){
         this.setState({
-            userName:'河畔一角'
+            userName: 'Bella1102'
         })
-        setInterval(()=>{
-            let sysTime = Utils.formatTime(new Date().getTime());
+        setInterval(() => {
             this.setState({
-                sysTime: sysTime
+                sysTime: Utils.formatTime(new Date().getTime())
             })
         }, 1000)
         this.getWeatherAPIData();
     }
 
     getWeatherAPIData(){
-        let city = '北京';
+        let city = 'BeiJing';
         const url = 'http://api.map.baidu.com/telematics/v3/weather?location=' 
                     + encodeURIComponent(city) + '&output=json&ak=3p49MVra6urFRGOT9s8UBWr2';
         Axios.jsonp({
@@ -46,8 +45,8 @@ class Header extends Component {
                 <Row className="header-top">
                     <Col span={24}>
                         <span>{this.state.userName}</span>
-                        <Link to='/login'>Log in</Link>
-                        <Link to='/register'>Register</Link>
+                        <Link to='/login'><Button type="primary" className="logreg">Log in</Button></Link>
+                        <Link to='/register'><Button type="primary" className="logreg">Register</Button></Link>
                     </Col>
                 </Row>
                 <Row className="breadcrumb">

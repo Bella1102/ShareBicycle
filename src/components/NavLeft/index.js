@@ -5,7 +5,6 @@ import menuConfig from '../../static/menuConfig';
 import './index.less';
 
 
-const { SubMenu } = Menu;
 
 class NavLeft extends Component {
 
@@ -17,7 +16,8 @@ class NavLeft extends Component {
     }
 
     renderMenu = (data) => {
-        return data.map ((item) => {
+        const { SubMenu } = Menu;
+        return data.map((item) => {
             if (item.children){
                 return (
                     <SubMenu title={item.title} key={item.key}>
@@ -26,9 +26,9 @@ class NavLeft extends Component {
                 )
             }
             return (
-                    <Menu.Item key={item.key}>
-                        <Link to={item.key}>{item.title}</Link>
-                    </Menu.Item>
+                <Menu.Item key={item.key}>
+                    <Link to={item.key}>{item.title}</Link>
+                </Menu.Item>
             )  
         })
     }
@@ -40,7 +40,7 @@ class NavLeft extends Component {
                     <Link to='/'><img src="/assets/logo-ant.svg" alt=""/></Link>
                     <Link to='/'><h1>ShareBicycle</h1></Link>
                  </div>
-                 <Menu theme="dark">
+                 <Menu theme="dark" className="nav-menu">
                     { this.state.menuTree }
                  </Menu>
             </div>

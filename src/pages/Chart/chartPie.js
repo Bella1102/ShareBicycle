@@ -10,41 +10,36 @@ import 'echarts/lib/component/markPoint';
 import chartTheme from './themeLight';
 
 
+
 class PieChart extends Component {
 
     UNSAFE_componentWillMount() {
-        echarts.registerTheme('Imooc', chartTheme);
+        echarts.registerTheme('pieChartTheme', chartTheme);
     }
 
-    getOption = () => {
+    getOption1 = () => {
         let option = {
-            title:{
-                text: '用户骑行订单',
-                x:'center'
-            },
+            title: { text: 'User Ride Order' },
             legend:{
-                orient:'vertical',
-                right:10,
-                top:20,
-                bottom:20,
-                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                orient: 'vertical',
+                right: 10,
+                top: 20,
+                bottom: 20,
+                data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
             },
-            tooltip:{
-                trigger:'item',
-                formatter:'{a}<br/>{b}:{c}({d}%)'
-            },
+            tooltip:{ trigger: 'item', formatter:'{a}<br/>{b}:{c}({d}%)' },
             series:[
                 {
-                    name:'订单量',
-                    type:'pie',
+                    name: 'Order Quantity',
+                    type: 'pie',
                     data:[
-                        { value: 1000, name: '周一' },
-                        { value: 1000, name: '周二' },
-                        { value: 2000, name: '周三' },
-                        { value: 1500, name: '周四' },
-                        { value: 3000, name: '周五' },
-                        { value: 2000, name: '周六' },
-                        { value: 1200, name: '周日' }
+                        { value: 1000, name: 'Monday' },
+                        { value: 1000, name: 'Tuesday' },
+                        { value: 2000, name: 'Wednesday' },
+                        { value: 1500, name: 'Thursday' },
+                        { value: 3000, name: 'Friday' },
+                        { value: 2000, name: 'Saturday' },
+                        { value: 1200, name: 'Sunday' }
                     ]
                 }
             ]
@@ -54,35 +49,29 @@ class PieChart extends Component {
 
     getOption2 = () => {
         let option = {
-            title: {
-                text: '用户骑行订单',
-                x: 'center'
-            },
+            title: { text: 'User Ride Order' },
             legend: {
                 orient: 'vertical',
                 right: 10,
                 top: 20,
                 bottom: 20,
-                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
             },
-            tooltip: {
-                trigger: 'item',
-                formatter: '{a}<br/>{b}:{c}({d}%)'
-            },
+            tooltip: { trigger: 'item', formatter: '{a}<br/>{b}:{c}({d}%)' },
             series: [
                 {
-                    name: '订单量',
+                    name: 'Order Quantity',
                     type: 'pie',
-                    radius:['50%','80%'],
-                    center:['50%','60%'],
+                    radius: ['50%', '80%'],
+                    center: ['50%', '60%'],
                     data:[
-                        { value: 1000, name: '周一' },
-                        { value: 1000, name: '周二' },
-                        { value: 2000, name: '周三' },
-                        { value: 1500, name: '周四' },
-                        { value: 3000, name: '周五' },
-                        { value: 2000, name: '周六' },
-                        { value: 1200, name: '周日' }
+                        { value: 1000, name: 'Monday' },
+                        { value: 1000, name: 'Tuesday' },
+                        { value: 2000, name: 'Wednesday' },
+                        { value: 1500, name: 'Thursday' },
+                        { value: 3000, name: 'Friday' },
+                        { value: 2000, name: 'Saturday' },
+                        { value: 1200, name: 'Sunday' }
                     ]
                 }
             ]
@@ -92,33 +81,27 @@ class PieChart extends Component {
 
     getOption3 = () => {
         let option = {
-            title: {
-                text: '用户骑行订单',
-                x: 'center'
-            },
+            title: { text: 'User Ride Order' },
             legend: {
                 orient: 'vertical',
                 right: 10,
                 top: 20,
                 bottom: 20,
-                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
             },
-            tooltip: {
-                trigger: 'item',
-                formatter: '{a}<br/>{b}:{c}({d}%)'
-            },
+            tooltip: { trigger: 'item', formatter: '{a}<br/>{b}:{c}({d}%)' },
             series: [
                 {
-                    name: '订单量',
+                    name: 'Order Quantity',
                     type: 'pie',
-                    data: [
-                        { value: 1000, name: '周一' },
-                        { value: 1000, name: '周二' },
-                        { value: 2000, name: '周三' },
-                        { value: 1500, name: '周四' },
-                        { value: 3000, name: '周五' },
-                        { value: 2000, name: '周六' },
-                        { value: 1200, name: '周日' }
+                    data:[
+                        { value: 1000, name: 'Monday' },
+                        { value: 1000, name: 'Tuesday' },
+                        { value: 2000, name: 'Wednesday' },
+                        { value: 1500, name: 'Thursday' },
+                        { value: 3000, name: 'Friday' },
+                        { value: 2000, name: 'Saturday' },
+                        { value: 1200, name: 'Sunday' }
                     ].sort((a, b) => {
                         return a.value - b.value;
                     }),
@@ -137,14 +120,14 @@ class PieChart extends Component {
     render() {
         return (
             <div>
-                <Card title="饼图表之一">
-                    <ReactEcharts option={this.getOption()} theme="Imooc" style={{ height: 500 }} />
+                <Card title="pie chart 1">
+                    <ReactEcharts option={this.getOption1()} theme="pieChartTheme" style={{ height: 500 }} />
                 </Card>
-                <Card title="饼图表之二" style={{ marginTop: 10 }}>
-                    <ReactEcharts option={this.getOption2()} theme="Imooc" style={{ height: 500 }} />
+                <Card title="pie chart 2" style={{ marginTop: 10 }}>
+                    <ReactEcharts option={this.getOption2()} theme="pieChartTheme" style={{ height: 600 }} />
                 </Card>
-                <Card title="饼图表之三" style={{ marginTop: 10 }}>
-                    <ReactEcharts option={this.getOption3()} theme="Imooc" style={{ height: 500 }} />
+                <Card title="pie chart 3" style={{ marginTop: 10 }}>
+                    <ReactEcharts option={this.getOption3()} theme="pieChartTheme" style={{ height: 500 }} />
                 </Card>
             </div>
         );

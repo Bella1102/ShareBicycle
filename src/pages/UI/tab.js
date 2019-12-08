@@ -1,12 +1,15 @@
-import React from 'react'
-import { Card, Button, Tabs, message, Icon } from 'antd'
-import './ui.less'
+import React, { Component } from 'react';
+import { Card,  Tabs, message, Icon } from 'antd';
+import './ui.less';
+
+
+
 const TabPane = Tabs.TabPane;
-export default class Buttons extends React.Component {
+class UITab extends Component {
 
     newTabIndex = 0;
     handleCallback = (key)=>{
-        message.info("Hi,您选择了页签："+key)
+        message.info("Hi,您选择了页签: " + key)
     }
 
     componentWillMount(){
@@ -33,7 +36,7 @@ export default class Buttons extends React.Component {
         })
     }
 
-    onChange = (activeKey)=>{
+    onChange = (activeKey) => {
         this.setState({
             activeKey
         })
@@ -103,3 +106,5 @@ export default class Buttons extends React.Component {
         );
     }
 }
+
+export default UITab;

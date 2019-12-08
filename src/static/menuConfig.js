@@ -1,9 +1,5 @@
 const menuConfig = [
     {
-        title: 'Home',
-        key: '/home'
-    },
-    {
         title: 'UI',
         key: '/ui',
         children:[
@@ -25,7 +21,7 @@ const menuConfig = [
             },
             {
                 title: 'Global Message',
-                key:' /ui/messages',
+                key: '/ui/messages',
             },
             {
                 title: 'Tab',

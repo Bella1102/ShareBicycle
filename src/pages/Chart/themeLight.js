@@ -106,9 +106,7 @@ export default {
             normal: {
                 borderWidth: 2,
                 borderColor: '#fff',
-                lineStyle: {
-                    width: 3
-                }
+                lineStyle: {  width: 3 }
             },
             emphasis: {
                 borderWidth: 0
@@ -164,13 +162,9 @@ export default {
         axisLine: {
             lineStyle: {
                 color: [
-                    [
-                        0.2, '#B5C334'
-                    ],
-                    [
-                        0.8, '#27727B'
-                    ],
-                    [1, '#C1232B']
+                    [ 0.2, '#B5C334' ],
+                    [ 0.8, '#27727B' ],
+                    [ 1, '#C1232B']
                 ]
             }
         },
