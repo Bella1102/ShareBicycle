@@ -1,10 +1,12 @@
-import React from 'react';
-import { Card, Button, Modal,Form, Input, Radio, DatePicker, Select} from 'antd'
-import axios from './../../axios'
-import Utils from './../../utils/utils'
-import BaseForm from './../../components/BaseForm'
-import ETable from './../../components/ETable'
-import moment from 'moment'
+import React, { Component } from 'react';
+import moment from 'moment';
+import { Card, Button, Modal,Form, Input, Radio, DatePicker, Select} from 'antd';
+import Axios from '../../utils/axios';
+import * as Utils from '../../utils/utils';
+import BaseForm from '../../components/BaseForm';
+import ETable from '../../components/ETable';
+
+
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 const TextArea = Input.TextArea;
@@ -12,7 +14,7 @@ const Option = Select.Option;
 
 
 
-export default class User extends React.Component{
+class Staff extends Component{
 
     params = {
         page:1
@@ -53,19 +55,19 @@ export default class User extends React.Component{
     }
 
     requestList = ()=>{
-        axios.requestList(this,'/user/list',this.params);
+        Axios.requestList(this,'/user/list',this.params);
     }
 
     // 功能区操作
     hanleOperate = (type)=>{
         let item =  this.state.selectedItem;
-        if(type == 'create'){
+        if(type === 'create'){
             this.setState({
                 type,
                 isVisible:true,
                 title:'创建员工'
             })
-        }else if(type == 'edit'){
+        }else if(type === 'edit'){
             if (!item){
                 Modal.info({
                     title: "提示",
@@ -79,7 +81,7 @@ export default class User extends React.Component{
                 title: '编辑员工',
                 userInfo:item
             })
-        }else if(type == 'detail'){
+        }else if(type === 'detail'){
             this.setState({
                 type,
                 isVisible: true,
@@ -99,7 +101,7 @@ export default class User extends React.Component{
                 title:'确认删除',
                 content:'是否要删除当前选中的员工',
                 onOk(){
-                    axios.ajax({
+                    Axios.ajax({
                         url:'/user/delete',
                         data:{
                             params:{
@@ -107,7 +109,7 @@ export default class User extends React.Component{
                             }
                         }
                     }).then((res)=>{
-                        if(res.code ==0){
+                        if(res.code === 0){
                             _this.setState({
                                 isVisible:false
                             })
@@ -123,13 +125,13 @@ export default class User extends React.Component{
     handleSubmit = ()=>{
         let type = this.state.type;
         let data = this.userForm.props.form.getFieldsValue();
-        axios.ajax({
-            url:type=='create'?'/user/add':'/user/edit',
+        Axios.ajax({
+            url:type === 'create'?'/user/add':'/user/edit',
             data:{
                 params: data
             }
         }).then((res)=>{
-            if(res.code ==0){
+            if(res.code === 0){
                 this.userForm.props.form.resetFields();
                 this.setState({
                     isVisible:false
@@ -151,7 +153,7 @@ export default class User extends React.Component{
                 title: '性别',
                 dataIndex: 'sex',
                 render(sex){
-                    return sex == 1?'男':'女'
+                    return sex === 1?'男':'女'
                 }
             }, {
                 title: '状态',
@@ -192,7 +194,7 @@ export default class User extends React.Component{
             },
         ]
         let footer = {};
-        if(this.state.type == 'detail'){
+        if(this.state.type === 'detail'){
             footer = {
                 footer: null
             }
@@ -231,7 +233,8 @@ export default class User extends React.Component{
                     width={600}
                     { ...footer }
                 >
-                    <UserForm type={this.state.type} userInfo={this.state.userInfo} wrappedComponentRef={(inst)=>{this.userForm = inst;}}/>
+                    <UserForm type={this.state.type} userInfo={this.state.userInfo} 
+                              wrappedComponentRef={(inst)=>{this.userForm = inst;}}/>
                 </Modal>
             </div>
         );
@@ -261,7 +264,7 @@ class UserForm extends React.Component{
             <Form layout="horizontal">
                 <FormItem label="用户名" {...formItemLayout}>
                     {
-                        type == 'detail'?userInfo.username:
+                        type === 'detail'?userInfo.username:
                         getFieldDecorator('user_name',{
                             initialValue:userInfo.username
                         })(
@@ -271,7 +274,7 @@ class UserForm extends React.Component{
                 </FormItem>
                 <FormItem label="性别" {...formItemLayout}>
                     {
-                        type == 'detail' ? userInfo.sex==1?'男':'女' :
+                        type === 'detail' ? userInfo.sex === 1 ? '男' : '女' :
                         getFieldDecorator('sex',{
                             initialValue: userInfo.sex
                         })(
@@ -284,7 +287,7 @@ class UserForm extends React.Component{
                 </FormItem>
                 <FormItem label="状态" {...formItemLayout}>
                     {
-                        type == 'detail' ? this.getState(userInfo.state) :
+                        type === 'detail' ? this.getState(userInfo.state) :
                         getFieldDecorator('state',{
                             initialValue: userInfo.state
                         })(
@@ -300,7 +303,7 @@ class UserForm extends React.Component{
                 </FormItem>
                 <FormItem label="生日" {...formItemLayout}>
                     {
-                        type == 'detail' ? userInfo.birthday :
+                        type === 'detail' ? userInfo.birthday :
                         getFieldDecorator('birthday',{
                             initialValue: moment(userInfo.birthday)
                         })(
@@ -310,7 +313,7 @@ class UserForm extends React.Component{
                 </FormItem>
                 <FormItem label="联系地址" {...formItemLayout}>
                     {
-                        type == 'detail' ? userInfo.address :
+                        type === 'detail' ? userInfo.address :
                         getFieldDecorator('address',{
                             initialValue: userInfo.address
                         })(
@@ -323,3 +326,5 @@ class UserForm extends React.Component{
     }
 }
 UserForm = Form.create({})(UserForm);
+
+export default Staff;

@@ -1,7 +1,7 @@
 import JsonP from 'jsonp';
 import axios from 'axios';
 import { Modal } from 'antd';
-import Utils from './utils';
+import * as Utils from './utils';
 
 
 class Axios {

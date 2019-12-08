@@ -16,7 +16,7 @@ class Order extends Component {
         }
     }
 
-    getDetailInfo = (orderId)=>{
+    getDetailInfo = (orderId) => {
         Axios.ajax({
             url:'/order/detail',
             data:{
@@ -24,8 +24,8 @@ class Order extends Component {
                     orderId: orderId
                 }
             }
-        }).then((res)=>{
-            if(res.code ==0){
+        }).then((res) => {
+            if(res.code === 0){
                 this.setState({
                     orderInfo:res.result
                 })
@@ -46,7 +46,7 @@ class Order extends Component {
     }
 
     // 添加地图控件
-    addMapControl = ()=>{
+    addMapControl = () => {
         let map = this.map;
         map.addControl(new window.BMap.ScaleControl({ anchor: window.BMAP_ANCHOR_TOP_RIGHT}));
         map.addControl(new window.BMap.NavigationControl({ anchor: window.BMAP_ANCHOR_TOP_RIGHT }));
@@ -54,7 +54,6 @@ class Order extends Component {
 
     // 绘制用户的行驶路线
     drawBikeRoute = (positionList)=>{
-        let map = this.map;
         let startPoint = '';
         let endPoint = '';
         if (positionList.length>0){
@@ -125,7 +124,7 @@ class Order extends Component {
                         <ul className="detail-form">
                             <li>
                                 <div className="detail-form-left">用车模式</div>
-                                <div className="detail-form-content">{info.mode == 1 ?'服务区':'停车点'}</div>
+                                <div className="detail-form-content">{info.mode === 1 ?'服务区' : '停车点'}</div>
                             </li>
                             <li>
                                 <div className="detail-form-left">订单编号</div>

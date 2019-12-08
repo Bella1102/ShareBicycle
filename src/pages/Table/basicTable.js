@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Table, Modal, Button, message} from 'antd';
 import Axios from '../../utils/axios';
-import Utils from '../../utils/utils';
+import * as Utils from '../../utils/utils';
 import basicTableData from './basicTableData';
 
 

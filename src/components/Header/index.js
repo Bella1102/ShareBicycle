@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'antd';
-import axios from '../../utils/axios';
-import utils from '../../utils/utils';
+import Axios from '../../utils/axios';
+import * as Utils from '../../utils/utils';
 import './index.less';
 
 
@@ -15,7 +15,7 @@ class Header extends Component {
             userName:'河畔一角'
         })
         setInterval(()=>{
-            let sysTime = utils.formatDate(new Date().getTime());
+            let sysTime = Utils.formatTime(new Date().getTime());
             this.setState({
                 sysTime: sysTime
             })
@@ -27,7 +27,7 @@ class Header extends Component {
         let city = '北京';
         const url = 'http://api.map.baidu.com/telematics/v3/weather?location=' 
                     + encodeURIComponent(city) + '&output=json&ak=3p49MVra6urFRGOT9s8UBWr2';
-        axios.jsonp({
+        Axios.jsonp({
             url: url
         }).then((res) => {
             if(res.status === 'success'){

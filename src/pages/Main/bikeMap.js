@@ -1,9 +1,11 @@
-import React from 'react';
-import {Card,Form} from 'antd'
-import BaseForm from '../../components/BaseForm'
-import axios from './../../axios'
+import React, { Component } from 'react';
+import { Card } from 'antd';
+import Axios from '../../utils/axios';
+import BaseForm from '../../components/BaseForm';
 
-export default class BikeMap extends React.Component{
+
+
+class BikeMap extends Component{
 
     state = {}
     map = '';
@@ -23,14 +25,14 @@ export default class BikeMap extends React.Component{
         }
     ]
 
-    requestList = ()=>{
-        axios.ajax({
+    requestList = () => {
+        Axios.ajax({
             url:'/map/bike_list',
             data:{
                 params:this.params
             }
-        }).then((res)=>{
-            if(res.code == 0){
+        }).then((res) => {
+            if(res.code === 0){
                 this.setState({
                     total_count:res.result.total_count
                 })
@@ -129,3 +131,5 @@ export default class BikeMap extends React.Component{
         );
     }
 }
+
+export default BikeMap;

@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-import { Card, Button, Form, Select, Modal } from 'antd';
+import { Card, Button, Form, Modal, message } from 'antd';
 import Axios from '../../utils/axios';
-import Utils from '../../utils/utils';
+import * as Utils from '../../utils/utils';
 import BaseForm from '../../components/BaseForm';
 import ETable from '../../components/ETable';
 
 
-const FormItem = Form.Item;
-const Option = Select.Option;
-export default class Order extends Component{
+
+class Order extends Component {
+
     state  = {
-        orderInfo:{},
-        orderConfirmVisble:false
+        orderInfo: {},
+        orderConfirmVisble: false
     }
-    params = {
-        page: 1
-    }
+    params = { page: 1 }
+    
     formList = [
         {
             type:'SELECT',
@@ -39,6 +38,7 @@ export default class Order extends Component{
             list: [{ id: '0', name: '全部' }, { id: '1', name: '进行中' }, { id: '2', name: '结束行程' }]
         }
     ]
+
     componentDidMount(){
         this.requestList()
     }
@@ -47,12 +47,12 @@ export default class Order extends Component{
         this.params = params;
         this.requestList();
     }
+
     requestList = () => {
-        let _this = this;
         Axios.requestList(this, '/order/list', this.params,true)
     }
     // 订单结束确认
-    handleConfirm = ()=>{
+    handleConfirm = () => {
         let item = this.state.selectedItem;
         if (!item) {
             Modal.info({
@@ -64,14 +64,12 @@ export default class Order extends Component{
         Axios.ajax({
             url:'/order/ebike_info',
             data:{
-                params:{
-                    orderId: item.id
-                }
+                params:{ orderId: item.id }
             }
-        }).then((res)=>{
-            if(res.code ==0 ){
+        }).then((res) => {
+            if(res.code === 0 ){
                 this.setState({
-                    orderInfo:res.result,
+                    orderInfo: res.result,
                     orderConfirmVisble: true
                 })
             }
@@ -79,17 +77,15 @@ export default class Order extends Component{
     }
 
     // 结束订单
-    handleFinishOrder = ()=>{
+    handleFinishOrder = () => {
         let item = this.state.selectedItem;
         Axios.ajax({
             url: '/order/finish_order',
             data: {
-                params: {
-                    orderId: item.id
-                }
+                params: { orderId: item.id }
             }
         }).then((res) => {
-            if (res.code == 0) {
+            if (res.code === 0) {
                 message.success('订单结束成功')
                 this.setState({
                     orderConfirmVisble: false
@@ -99,7 +95,7 @@ export default class Order extends Component{
         })
     }
 
-    openOrderDetail = ()=>{
+    openOrderDetail = () => {
         let item = this.state.selectedItem;
         if (!item) {
             Modal.info({
@@ -108,62 +104,31 @@ export default class Order extends Component{
             })
             return;
         }
-        window.open(`/#/common/order/detail/${item.id}`,'_blank')
+        window.open(`/order/detail/${item.id}`, '_blank')
     }
+
     render(){
         const columns = [
-            {
-                title:'订单编号',
-                dataIndex:'order_sn'
+            { title:'订单编号', dataIndex:'order_sn' },
+            { title: '车辆编号', dataIndex: 'bike_sn' },
+            { title: '用户名', dataIndex: 'user_name' },
+            { title: '手机号', dataIndex: 'mobile' },
+            { title: '里程', dataIndex: 'distance',
+                render(distance){ return distance/1000 + 'Km'; }
             },
-            {
-                title: '车辆编号',
-                dataIndex: 'bike_sn'
-            },
-            {
-                title: '用户名',
-                dataIndex: 'user_name'
-            },
-            {
-                title: '手机号',
-                dataIndex: 'mobile'
-            },
-            {
-                title: '里程',
-                dataIndex: 'distance',
-                render(distance){
-                    return distance/1000 + 'Km';
-                }
-            },
-            {
-                title: '行驶时长',
-                dataIndex: 'total_time'
-            },
-            {
-                title: '状态',
-                dataIndex: 'status'
-            },
-            {
-                title: '开始时间',
-                dataIndex: 'start_time'
-            },
-            {
-                title: '结束时间',
-                dataIndex: 'end_time'
-            },
-            {
-                title: '订单金额',
-                dataIndex: 'total_fee'
-            },
-            {
-                title: '实付金额',
-                dataIndex: 'user_pay'
-            }
+            { title: '行驶时长',  dataIndex: 'total_time' },
+            { title: '状态', dataIndex: 'status' },
+            { title: '开始时间', dataIndex: 'start_time' },
+            { title: '结束时间', dataIndex: 'end_time' },
+            { title: '订单金额', dataIndex: 'total_fee' },
+            { title: '实付金额', dataIndex: 'user_pay' }
         ]
+
         const formItemLayout = {
             labelCol:{span:5},
             wrapperCol:{span:19}
         }
+
         return (
             <div>
                 <Card>
@@ -182,36 +147,33 @@ export default class Order extends Component{
                         selectedIds={this.state.selectedIds}
                         selectedItem={this.state.selectedItem}
                         pagination={this.state.pagination}
-                        // rowSelection="checkbox"
                     />
                 </div>
                 <Modal
                     title="结束订单"
-                    visible={this.state.orderConfirmVisble}
-                    onCancel={()=>{
-                        this.setState({
-                            orderConfirmVisble:false
-                        })
-                    }}
-                    onOk={this.handleFinishOrder}
                     width={600}
+                    visible={this.state.orderConfirmVisble}
+                    onOk={this.handleFinishOrder}
+                    onCancel={() => { this.setState({ orderConfirmVisble: false })}}
                 >
                     <Form layout="horizontal">
-                        <FormItem label="车辆编号" {...formItemLayout}>
+                        <Form.Item label="车辆编号" {...formItemLayout}>
                             {this.state.orderInfo.bike_sn}
-                        </FormItem>
-                        <FormItem label="剩余电量" {...formItemLayout}>
+                        </Form.Item>
+                        <Form.Item label="剩余电量" {...formItemLayout}>
                             {this.state.orderInfo.battery + '%'}
-                        </FormItem>
-                        <FormItem label="行程开始时间" {...formItemLayout}>
+                        </Form.Item>
+                        <Form.Item label="行程开始时间" {...formItemLayout}>
                             {this.state.orderInfo.start_time}
-                        </FormItem>
-                        <FormItem label="当前位置" {...formItemLayout}>
+                        </Form.Item>
+                        <Form.Item label="当前位置" {...formItemLayout}>
                             {this.state.orderInfo.location}
-                        </FormItem>
+                        </Form.Item>
                     </Form>
                 </Modal>
             </div>
         );
     }
 }
+
+export default Order;

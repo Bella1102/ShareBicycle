@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
-import MenuConfig from './menuConfig';
+import menuConfig from '../../utils/menuConfig';
 import './index.less';
 
 
@@ -10,7 +10,7 @@ const { SubMenu } = Menu;
 class NavLeft extends Component {
 
     UNSAFE_componentWillMount(){
-        const menuTree = this.renderMenu(MenuConfig);
+        const menuTree = this.renderMenu(menuConfig);
         this.setState({
             menuTree
         })
