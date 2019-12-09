@@ -22,18 +22,18 @@ export function formatTime(timestamp) {
     return formatTime;
 }
 
-export function pagination(data,callback){
+export function pagination(data, callback){
     return {
-        onChange:(current) => {
+        onChange: (current) => {
             callback(current)
         },
         current: data.result.page,
         pageSize: data.result.page_size,
         total: data.result.total_count,
-        showTotal:() => {
+        showTotal: () => {
             return `共${data.result.total_count}条`
         },
-        showQuickJumper:true
+        showQuickJumper: true
     }
 }
 

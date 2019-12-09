@@ -50,31 +50,26 @@ class Axios {
             loading = document.getElementById('ajaxLoading');
             loading.style.display = 'block';
         }
-        let baseApi = '';
-        if(options.isMock){
-            baseApi = 'https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api';
-        }else{
-            baseApi = 'https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api';
-        }
+        let baseApi = 'https://www.easy-mock.com/mock/5deacf8048997e73bd3bcbeb/mockapi';
         return new Promise((resolve, reject) => {
             axios({
                 url: options.url,
                 method: 'get',
                 baseURL: baseApi,
                 timeout: 5000,
-                params: (options.data && options.data.params) || ''
-            }).then((response) => {
+                params: options.data && options.data.params
+            }).then((res) => {
                 if (options.data && options.data.isShowLoading !== false) {
                     loading = document.getElementById('ajaxLoading');
                     loading.style.display = 'none';
                 }
-                if (response.data.code === '0'){
-                    resolve(response.data);
-                }else{
-                    Modal.info({ title: "提示", content: response.data.msg })
+                if (res.data.code === 0){
+                    resolve(res.data);
+                } else {
+                    Modal.info({ title: "提示", content: res.data.msg })
                 }  
-            }).catch((error) => {
-				reject(error);
+            }).catch(() => {
+				console.log("utils axios error")
 			});
         });
     }
