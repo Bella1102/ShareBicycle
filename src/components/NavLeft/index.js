@@ -1,17 +1,33 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Menu } from 'antd';
 import menuConfig from '../../static/menuConfig';
+import { switchMenu } from '../../redux/action';
 import './index.less';
 
 
 
 class NavLeft extends Component {
 
+    state = {
+        currentKey: ''
+    }
+
     UNSAFE_componentWillMount(){
         const menuTree = this.renderMenu(menuConfig);
+        let currentKey = window.location.hash.replace(/#|\?.*$/g, '');
         this.setState({
-            menuTree
+            menuTree,
+            currentKey
+        })
+    }
+
+    handleClick = ({item, key}) => {
+        const { dispatch } = this.props;
+        dispatch(switchMenu(item.props.title))
+        this.setState({
+            currentKey: key
         })
     }
 
@@ -40,7 +56,10 @@ class NavLeft extends Component {
                     <Link to='/'><img src="/assets/logo-ant.svg" alt=""/></Link>
                     <Link to='/'><h1>ShareBicycle</h1></Link>
                  </div>
-                 <Menu theme="dark" className="nav-menu">
+                 <Menu 
+                    onClick={this.handleClick}
+                    selectedKeys={[this.state.currentKey]} 
+                    theme="dark" className="nav-menu">
                     { this.state.menuTree }
                  </Menu>
             </div>
@@ -49,4 +68,4 @@ class NavLeft extends Component {
 
 }
 
-export default NavLeft;
+export default connect()(NavLeft);

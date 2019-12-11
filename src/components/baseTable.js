@@ -17,7 +17,7 @@ class BaseTable extends Component{
                     selectedRowKeys.push(index);
                     selectedItem.push(record);
                 } else {
-                    selectedIds.splice(i,1);
+                    selectedIds.splice(i, 1);
                     selectedRowKeys.splice(i, 1);
                     selectedItem.splice(i, 1);
                 }
@@ -38,7 +38,7 @@ class BaseTable extends Component{
         let row_selection = this.props.rowSelection;
         let selectedRowKeys = this.props.selectedRowKeys;
         const rowSelection = {
-            type:'radio',
+            type:  'radio',
             selectedRowKeys
         }
         if (row_selection === false || row_selection === null){

@@ -10,22 +10,20 @@ import BaseTable from '../../components/baseTable';
 class Permission extends Component {
 
     state = { }
-    componentWillMount(){
+    UNSAFE_componentWillMount(){
         Axios.requestList(this, '/role/list', {});
     }
 
     // 角色提交
-    handleRoleSubmit=()=>{
+    handleRoleSubmit=() => {
         let data = this.roleForm.props.form.getFieldsValue();
         Axios.ajax({
             url: 'role/create',
-            data:{ params: data }
-        }).then((res)=>{
-            if(res.code === 0){
-                this.setState({ isRoleVisible:false })
-                this.roleForm.props.form.resetFields();
-                Axios.requestList(this, '/role/list', {});
-            }
+            data: { params: data }
+        }).then((res) => {
+            this.setState({ isRoleVisible: false })
+            this.roleForm.props.form.resetFields();
+            Axios.requestList(this, '/role/list', {});
         })
     }
 
@@ -76,7 +74,7 @@ class Permission extends Component {
 
     getRoleUserList = (id) => {
         Axios.ajax({
-            url:'/role/user_list',
+            url: '/role/user_list',
             data:{
                 params:{ id }
             }
@@ -91,8 +89,8 @@ class Permission extends Component {
     getAuthUserList = (dataSource) => {
         const mockData = [];
         const targetKeys = [];
-        if (dataSource && dataSource.length>0){
-            for(let i=0;i< dataSource.length;i++){
+        if (dataSource && dataSource.length > 0){
+            for(let i = 0; i < dataSource.length; i++){
                 const data = {
                     key: dataSource[i].user_id,
                     title: dataSource[i].user_name,
@@ -115,13 +113,13 @@ class Permission extends Component {
         data.user_ids = this.state.targetKeys;
         data.role_id = this.state.selectedItem.id;
         Axios.ajax({
-            url:'/role/user_role_edit',
-            data:{
+            url: '/role/user_role_edit',
+            data: {
                 params:{ ...data }
             }
         }).then((res) => {
             if(res){
-                this.setState({ isUserVisible:false })
+                this.setState({ isUserVisible: false })
                 Axios.requestList(this, '/role/list', {});
             }
         })
@@ -163,7 +161,7 @@ class Permission extends Component {
                     onOk={this.handleRoleSubmit}
                     onCancel={() => {
                         this.roleForm.props.form.resetFields();
-                        this.setState({ isRoleVisible:false })
+                        this.setState({ isRoleVisible: false })
                     }}>
                     <RoleForm wrappedComponentRef={(inst)=>this.roleForm=inst}></RoleForm>
                 </Modal>
@@ -275,7 +273,7 @@ class PermEditForm extends Component{
                 <Form.Item label="状态" {...formItemLayout}>
                     {
                         getFieldDecorator('status',{
-                            initialValue:'1'
+                            initialValue: '1'
                         })(
                             <Select>
                                 <Select.Option value="1">启用</Select.Option>

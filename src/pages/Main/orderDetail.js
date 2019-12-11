@@ -18,8 +18,8 @@ class Order extends Component {
 
     getDetailInfo = (orderId) => {
         Axios.ajax({
-            url:'/order/detail',
-            data:{
+            url: '/order/detail',
+            data: {
                 params:{
                     orderId: orderId
                 }
@@ -27,7 +27,7 @@ class Order extends Component {
         }).then((res) => {
             if(res.code === 0){
                 this.setState({
-                    orderInfo:res.result
+                    orderInfo: res.result
                 })
                 this.renderMap(res.result);
             }
@@ -42,7 +42,7 @@ class Order extends Component {
         // 调用路线图绘制方法
         this.drawBikeRoute(result.position_list);
         // 调用服务区绘制方法
-        this.drwaServiceArea(result.area);
+        this.drawServiceArea(result.area);
     }
 
     // 添加地图控件
@@ -95,7 +95,7 @@ class Order extends Component {
     }
 
     // 绘制服务区
-    drwaServiceArea = (positionList)=>{
+    drawServiceArea = (positionList)=>{
         // 连接路线图
         let trackPoint = [];
         for (let i = 0; i < positionList.length; i++) {

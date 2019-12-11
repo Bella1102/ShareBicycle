@@ -29,12 +29,10 @@ class BikeMap extends Component{
                 params: this.params
             }
         }).then((res) => {
-            if(res.code === 0){
-                this.setState({
-                    total_count: res.result.total_count
-                })
-                this.renderMap(res);
-            }
+            this.setState({
+                total_count: res.result.total_count
+            })
+            this.renderMap(res);
         })
     }
 

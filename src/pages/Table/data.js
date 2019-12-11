@@ -189,13 +189,13 @@ export const advancedTableColumns2 = [
     {
         title: 'UserName',
         key: 'userName',
-        width: 80,
+        width: 120,
         dataIndex: 'userName'
     },
     {
         title: 'Sex',
         key: 'sex',
-        width: 80,
+        width: 120,
         dataIndex: 'sex',
         render(sex) {
             return sex === 1 ? 'Male' : 'Female'
@@ -204,7 +204,7 @@ export const advancedTableColumns2 = [
     {
         title: 'State',
         key: 'state',
-        width: 80,
+        width: 120,
         dataIndex: 'state',
         render(state){
             let config  = {
@@ -220,7 +220,7 @@ export const advancedTableColumns2 = [
     {
         title: 'Interest',
         key: 'interest',
-        width: 80,
+        width: 120,
         dataIndex: 'interest',
         render(interest) {
             let config = {
@@ -238,20 +238,62 @@ export const advancedTableColumns2 = [
     },
     {
         title: 'Birthday',
-        key: 'birthday',
-        width: 80,
+        key: 'birthday1',
+        width: 120,
+        dataIndex: 'birthday'
+    },
+    {
+        title: 'Birthday',
+        key: 'birthday2',
+        width: 120,
+        dataIndex: 'birthday'
+    },
+    {
+        title: 'Birthday',
+        key: 'birthday3',
+        width: 120,
+        dataIndex: 'birthday'
+    },
+    {
+        title: 'Birthday',
+        key: 'birthday4',
+        width: 120,
+        dataIndex: 'birthday'
+    },
+    {
+        title: 'Birthday',
+        key: 'birthday5',
+        width: 120,
+        dataIndex: 'birthday'
+    },
+    {
+        title: 'Birthday',
+        key: 'birthday6',
+        width: 120,
+        dataIndex: 'birthday'
+    },
+    {
+        title: 'Birthday',
+        key: 'birthday7',
+        width: 120,
+        dataIndex: 'birthday'
+    },
+    {
+        title: 'Birthday',
+        key: 'birthday8',
+        width: 120,
         dataIndex: 'birthday'
     },
     {
         title: 'Address',
         key: 'address',
-        width: 80,
+        width: 120,
         dataIndex: 'address'
     },
     {
         title: 'Time',
         key: 'time',
-        width: 80,
+        width: 120,
         dataIndex: 'time'
     }
 ]

@@ -19,6 +19,7 @@ class BasicTable extends Component{
 
     // 动态获取mock数据
     request = () => {
+        let _this = this;
         Axios.ajax({
             url: '/table/list',
             data: {
@@ -37,7 +38,7 @@ class BasicTable extends Component{
                     selectedRowKeys: [],
                     selectedRows: null,
                     pagination: Utils.pagination(res, (current) => {
-                        this.params.page = current;
+                        _this.params.page = current;
                         this.request();
                     })
                 })

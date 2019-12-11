@@ -15,7 +15,7 @@ class AdvanceTable extends Component {
 
     request = () => {
         Axios.ajax({
-            url: '/table/list',
+            url: '/table/advanced/list',
             data: {
                 params: {
                     page: this.params.page
@@ -79,47 +79,7 @@ class AdvanceTable extends Component {
                     return config[state];
                 }
             },
-            { title: '爱好', key: 'interest', dataIndex: 'interest',
-                render(interest) {
-                    let config = {
-                        '1': '游泳',
-                        '2': '打篮球',
-                        '3': '踢足球',
-                        '4': '跑步',
-                        '5': '爬山',
-                        '6': '骑行',
-                        '7': '桌球',
-                        '8': '麦霸'
-                    }
-                    return config[interest];
-                }
-            },
-            { title: '生日', key: 'birthday', dataIndex: 'birthday' },
-            { title: '地址', key: 'address', dataIndex: 'address' },
-            { title: '早起时间', key: 'time', dataIndex: 'time' }
-        ]
-
-        const advancedTableColumns4 = [
-
-            { title: 'id', dataIndex: 'id' },
-            { title: '用户名', dataIndex: 'userName' },
-            { title: '性别', dataIndex: 'sex',
-                render(sex) { return sex === 1 ? '男' : '女' }
-            },
-            { title: '年龄', dataIndex: 'age'},
-            { title: '状态', dataIndex: 'state',
-                render(state){
-                    let config  = {
-                        '1': 'Student',
-                        '2': 'Boss',
-                        '3': 'CEO',
-                        '4': 'Saler',
-                        '5': 'Worker'
-                    }
-                    return config[state];
-                }
-            },
-            { title: '爱好', dataIndex: 'interest',
+            { title: '提示', dataIndex: 'interest',
                 render(interest) {
                     let config = {
                         '1': <Badge status="success" text="成功"/>,
@@ -128,16 +88,16 @@ class AdvanceTable extends Component {
                         '4': <Badge status="processing" text="进行中" />,
                         '5': <Badge status="warning" text="警告" />
                     }
-                    return config[interest];
-                }
-            },
-            { title: '生日', dataIndex: 'birthday' },
-            { title: '地址', dataIndex: 'address' },
-            { title: '操作',
+                return config[interest];
+            }
+        },
+            { title: '生日', key: 'birthday', dataIndex: 'birthday' },
+            { title: '地址', key: 'address', dataIndex: 'address' },
+            { title: '操作', 
                 render: (text, item) => {
                     return <Button size="small" onClick={(item) => { this.handleDelete(item) }}>删除</Button>
-                }
             }
+        }
         ]
         
         return (
@@ -148,7 +108,7 @@ class AdvanceTable extends Component {
                         columns={tableData.advancedTableColumns1}
                         dataSource={this.state.dataSource}
                         pagination={false}
-                        scroll={{y: 240}}
+                        scroll={{y: 300}}
                     />
                 </Card>
                 <Card title="左侧固定" style={{marginTop: 10}}>
@@ -157,24 +117,16 @@ class AdvanceTable extends Component {
                         columns={tableData.advancedTableColumns2}
                         dataSource={this.state.dataSource}
                         pagination={false}
-                        scroll={{ x: 1200 }}
+                        scroll={{x: 1770}}
                     />
                 </Card>
-                <Card title="表格排序" style={{marginTop: 10}}>
+                <Card title="排序&操作" style={{marginTop: 10}}>
                     <Table
                         bordered
                         columns={advancedTableColumns3}
                         dataSource={this.state.dataSource}
                         pagination={false}
                         onChange={this.handleChange}
-                    />
-                </Card>
-                <Card title="操作按钮" style={{marginTop: 10}}>
-                    <Table
-                        bordered
-                        columns={advancedTableColumns4}
-                        dataSource={this.state.dataSource}
-                        pagination={false}
                     />
                 </Card>
             </div>

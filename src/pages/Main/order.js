@@ -67,12 +67,10 @@ class Order extends Component {
                 params:{ orderId: item.id }
             }
         }).then((res) => {
-            if(res.code === 0 ){
-                this.setState({
-                    orderInfo: res.result,
-                    orderConfirmVisble: true
-                })
-            }
+            this.setState({
+                orderInfo: res.result,
+                orderConfirmVisble: true
+            })
         })
     }
 

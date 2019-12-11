@@ -34,7 +34,7 @@ class Axios {
         return new Promise((resolve, reject) => {
             JsonP(options.url, {
                 param: 'callback'
-            }, function (err, response) {
+            }, function (err, response){
                 if (response.status === 'success') {
                     resolve(response);
                 } else {
@@ -50,7 +50,8 @@ class Axios {
             loading = document.getElementById('ajaxLoading');
             loading.style.display = 'block';
         }
-        let baseApi = 'https://www.easy-mock.com/mock/5deacf8048997e73bd3bcbeb/mockapi';
+        // my easy-mock: 'https://www.easy-mock.com/mock/5deacf8048997e73bd3bcbeb/mockapi'
+        let baseApi = 'https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api';
         return new Promise((resolve, reject) => {
             axios({
                 url: options.url,
@@ -63,7 +64,7 @@ class Axios {
                     loading = document.getElementById('ajaxLoading');
                     loading.style.display = 'none';
                 }
-                if (res.data.code === 0){
+                if (res.data.code === '0'){
                     resolve(res.data);
                 } else {
                     Modal.info({ title: "提示", content: res.data.msg })

@@ -36,8 +36,8 @@ class City extends Component{
                 return item;
             });
             this.setState({
-                list:list,
-                pagination:Utils.pagination(res, (current) => {
+                list: list,
+                pagination: Utils.pagination(res, (current) => {
                     _this.params.page = current;
                     _this.requestList();
                 })
