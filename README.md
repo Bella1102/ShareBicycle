@@ -1,5 +1,6 @@
 ## ShareBicycle  
-##### This is a ShareBicycle Background Management System Project.  
+##### This is a ShareBicycle Background Management System Project.
+##### http://sharebicycle.s3-website-ap-southeast-2.amazonaws.com/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

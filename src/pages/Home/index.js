@@ -7,7 +7,7 @@ class Home extends Component {
     render() {
         return (
             <div className="home-wrap">
-               Welcome to Learn Background Management System!
+               Welcome to Learn ShareBicycle Background Management System!
             </div>
           );
     }

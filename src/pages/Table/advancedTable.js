@@ -22,7 +22,7 @@ class AdvanceTable extends Component {
                 }
             }
         }).then((res) => {
-            if (res.code === 0) {
+            if (res.code === '0') {
                 res.result.list.map((item) => {
                     item.key = item.id;
                     return null;

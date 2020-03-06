@@ -28,7 +28,7 @@ class BasicTable extends Component{
                 }
             }
         }).then((res) => {
-            if(res.code === 0){
+            if(res.code === '0'){
                 res.result.list.map((item, index) => {
                     item.key = index;
                     return null;
